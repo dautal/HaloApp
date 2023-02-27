@@ -5,68 +5,88 @@
 //  Created by Team 23 Halo on 2/23/23.
 //
 
-import Foundation
-import UIKit
+import SwiftUI
 
-class HomeViewController: UIViewController {
+
+struct HomeView: View {
+    @Binding var isConnected: Bool
+    @State private var webViewPresented = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-    }
-    
-    private func setupUI() {
-        let titleLabel=UILabel()
-        titleLabel.text="Halo"
-        titleLabel.font=UIFont.systemFont(ofSize: 24)
-        titleLabel.textColor = .black
-        view.addSubview(titleLabel)
-        
-        let button1=UIButton()
-        button1.setTitle("Connect", for: .normal)
-        button1.backgroundColor = .blue
-        view.addSubview(button1)
-        
-        let button2=UIButton()
-        button2.setTitle("How to Use", for: .normal)
-        button2.backgroundColor = .red
-        view.addSubview(button2)
-        
-        let button3=UIButton()
-        button3.setTitle("Website", for: .normal)
-        button3.backgroundColor = .green
-        view.addSubview(button3)
-        
-        //Auto Layout Constraints
-        titleLabel.translatesAutoresizingMaskIntoConstraints=false
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        button1.translatesAutoresizingMaskIntoConstraints=false
-        NSLayoutConstraint.activate([
-            button1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            button1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button1.widthAnchor.constraint(equalToConstant: 200),
-            button1.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        button2.translatesAutoresizingMaskIntoConstraints=false
-        NSLayoutConstraint.activate([
-            button2.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            button2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button2.widthAnchor.constraint(equalToConstant: 200),
-            button2.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        button3.translatesAutoresizingMaskIntoConstraints=false
-        NSLayoutConstraint.activate([
-            button3.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            button3.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button3.widthAnchor.constraint(equalToConstant: 200),
-            button3.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
+    var body: some View {
+        VStack {
+            Image("IMG_1765")
+                .resizable()
+                .frame(width: 150, height: 150)
+                .padding(.top, 150)
+            
+            Spacer()
+            
+            Button(action: {
+                isConnected=true
+            }) {
+                HStack {
+                    Image(systemName: "wifi")
+                        .font(.title)
+                    Text("Connect")
+                        .fontWeight(.semibold)
+                        .font(.title)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .cornerRadius(40)
+                .padding(.horizontal, 20)
+            }
+            .fullScreenCover(isPresented: $isConnected) {
+                ContentView()
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                // Define action for Info button
+            }) {
+                HStack {
+                    Image(systemName: "info.circle")
+                        .font(.title)
+                    Text("Info")
+                        .fontWeight(.semibold)
+                        .font(.title)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .cornerRadius(40)
+                .padding(.horizontal, 20)
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                guard let url = URL(string: "https://frankwu5.wixsite.com/halo-drink-protector") else { return }
+                UIApplication.shared.open(url)
+            }) {
+                HStack {
+                    Image(systemName: "link")
+                        .font(.title)
+                    Text("Website")
+                        .fontWeight(.semibold)
+                        .font(.title)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .cornerRadius(40)
+                .padding(.horizontal, 20)
+            }
+                
+            Spacer()
+        }
+        .background(Color.white)
+        .edgesIgnoringSafeArea(.all)
+        .font(.custom("Helvetica Neue", size: 16))
     }
 }

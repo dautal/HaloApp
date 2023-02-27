@@ -26,8 +26,14 @@ struct ContentView: View {
                         })
                     }
                 }
+                .navigationBarBackButtonHidden(true)
                 .navigationBarTitle(isConnected ? "Device Info" : "Bluetooth Devices")
                             .toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    NavigationLink(destination: HomeView(isConnected: $isConnected)) {
+                                        Image(systemName: "house")
+                                    }
+                                }
                                 ToolbarItem(placement: .navigationBarTrailing) {
                                     Button(isScanning ? "Stop Scanning" : "Start Scanning") {
                                         isScanning.toggle()

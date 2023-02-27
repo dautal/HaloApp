@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct Halo2App: App {
+    @State var isConnected = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView(isConnected: $isConnected)
         }
     }
 }

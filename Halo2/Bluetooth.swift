@@ -4,6 +4,12 @@
 //
 //  Created by Team 23 Halo on 2/14/23.
 //
+//
+
+
+
+
+
 import CoreBluetooth
 import UIKit
 import Combine
@@ -14,39 +20,38 @@ class BluetoothManager: NSObject, ObservableObject {
     @Published var peripherals: [CBPeripheral] = []
     internal var selectedPeripheral: CBPeripheral?
     private var cancellables: Set<AnyCancellable> = []
-    @Published var batteryLevel: Int = 0
     @Published var isConnected = false
+    @Published var voltage: Double = 0
     
-    private let batteryServiceUUID = CBUUID(string: "180F")
-    private let batteryLevelCharacteristicUUID = CBUUID(string: "2A19")
+    private let voltageServiceUUID = CBUUID(string: "75340d9a-b70d-11ed-afa1-0242ac120002")
+    private let voltageCharacteristicUUID = CBUUID(string: "84244464-b70d-11ed-afa1-0242ac120002")
 
-    
     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
-    
+
     func startScanning() {
         centralManager.scanForPeripherals(withServices: nil, options: nil)
     }
-    
+
     func stopScanning() {
         centralManager.stopScan()
     }
-    
+
     func setTableView(_ tableView: UITableView) {
         self.tableView = tableView
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
+
     func connectToPeripheral(_ peripheral: CBPeripheral) {
             centralManager.stopScan()
             selectedPeripheral = peripheral
             selectedPeripheral?.delegate = self
             centralManager.connect(peripheral, options: nil)
     }
-    
+
     func disconnectPeripheral() {
         if let selectedPeripheral = selectedPeripheral {
                 centralManager.cancelPeripheralConnection(selectedPeripheral)
@@ -73,7 +78,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
             print("Unknown Bluetooth status")
         }
     }
-    
+
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
             guard advertisementData[CBAdvertisementDataIsConnectable] as? Bool == true else {
                 return // Ignore non-connectable devices
@@ -93,20 +98,20 @@ extension BluetoothManager: CBCentralManagerDelegate {
             }
         }
     }
-    
+
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
             print("Connected to \(peripheral.name ?? "Unknown")")
             selectedPeripheral = peripheral
             stopScanning()
             peripheral.delegate = self
-            peripheral.discoverServices([batteryServiceUUID])
+            peripheral.discoverServices([voltageServiceUUID])
             isConnected = true
         }
 
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("Failed to connect to \(peripheral.name ?? "Unknown")")
     }
-    
+
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("Disconnected from \(peripheral.name ?? "Unknown")")
         selectedPeripheral = nil
@@ -119,7 +124,7 @@ extension BluetoothManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return peripherals.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let peripheral = peripherals[indexPath.row]
@@ -134,9 +139,8 @@ extension BluetoothManager: UITableViewDelegate {
         connectToPeripheral(peripheral)
     }
 }
-
 extension BluetoothManager: CBPeripheralDelegate {
-    
+
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard error == nil else {
             print("Error discovering services: \(error!.localizedDescription)")
@@ -147,12 +151,12 @@ extension BluetoothManager: CBPeripheralDelegate {
             return
         }
         for service in services {
-            if service.uuid == batteryServiceUUID {
-                peripheral.discoverCharacteristics([batteryLevelCharacteristicUUID], for: service)
+            if service.uuid == voltageServiceUUID {
+                peripheral.discoverCharacteristics([voltageCharacteristicUUID], for: service)
             }
         }
     }
-    
+
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard error == nil else {
             print("Error discovering characteristics: \(error!.localizedDescription)")
@@ -163,13 +167,13 @@ extension BluetoothManager: CBPeripheralDelegate {
             return
         }
         for characteristic in characteristics {
-                if characteristic.uuid == batteryLevelCharacteristicUUID {
-                    print("Found battery level characteristic: \(characteristic)")
-                    peripheral.setNotifyValue(true, for: characteristic)
-                }
+            if characteristic.uuid == voltageCharacteristicUUID {
+                print("Found voltage characteristic: \(characteristic)")
+                peripheral.setNotifyValue(true, for: characteristic)
             }
         }
-    
+    }
+
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
             print("Error updating characteristic value: \(error!.localizedDescription)")
@@ -179,10 +183,12 @@ extension BluetoothManager: CBPeripheralDelegate {
             print("No value found for characteristic: \(characteristic)")
             return
         }
-        if characteristic.uuid == batteryLevelCharacteristicUUID {
-            let batteryLevel = Int(value.first ?? 0) as Int
-            print("Battery level: \(batteryLevel)%")
-            self.batteryLevel = batteryLevel
+        if characteristic.uuid == voltageCharacteristicUUID {
+            let voltage = Double (value.first ?? 0) as Double
+            print("Voltage: \(voltage) V")
+            self.voltage = voltage/100
+
         }
     }
-}
+
+    }

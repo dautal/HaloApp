@@ -9,6 +9,8 @@ struct ContentView: View {
     @State private var isConnected = false
     @State private var isScanningAllowed = true
     @State private var voltage: Double = 0.0
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
 
         NavigationView {
@@ -29,12 +31,13 @@ struct ContentView: View {
                     })
                 }
             }
-            .navigationBarBackButtonHidden(true)
             .navigationBarTitle(isConnected ? "Device Info" : "Bluetooth Devices")
             .navigationBarItems(
-                leading: NavigationLink(destination: HomeView(isConnected: $isConnected)) {
-                    Image(systemName: "house.fill")
-                },
+                leading: Button(action: {
+                                    presentationMode.wrappedValue.dismiss() // Dismiss the view when the Home button is tapped
+                                }) {
+                                    Image(systemName: "house.fill")
+                                },
                 trailing:
                 Group {
                     if !isConnected {

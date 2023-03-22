@@ -12,6 +12,7 @@ struct HomeView: View {
     @Binding var isConnected: Bool
     @State private var webViewPresented = false
     
+    
     var body: some View {
         VStack {
             Image("IMG_1765")
@@ -38,9 +39,12 @@ struct HomeView: View {
                 .cornerRadius(40)
                 .padding(.horizontal, 20)
             }
-            .fullScreenCover(isPresented: $isConnected) {
+            .fullScreenCover(isPresented: $isConnected, onDismiss: {
+                isConnected = false
+            }, content: {
                 ContentView()
-            }
+            })
+
             
             Spacer()
             

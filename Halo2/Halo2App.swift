@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct Halo2App: App {
     @State var isConnected = false
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {

@@ -21,7 +21,7 @@ class BluetoothManager: NSObject, ObservableObject {
     internal var selectedPeripheral: CBPeripheral?
     private var cancellables: Set<AnyCancellable> = []
     @Published var isConnected = false
-    @Published var voltage: Double = 0
+    @Published var Cover_Status: Int = 1
     
     private let voltageServiceUUID = CBUUID(string: "75340d9a-b70d-11ed-afa1-0242ac120002")
     private let voltageCharacteristicUUID = CBUUID(string: "84244464-b70d-11ed-afa1-0242ac120002")
@@ -55,6 +55,26 @@ class BluetoothManager: NSObject, ObservableObject {
     func disconnectPeripheral() {
         if let selectedPeripheral = selectedPeripheral {
                 centralManager.cancelPeripheralConnection(selectedPeripheral)
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard error == nil else {
+        print("Error updating characteristic value: \(error!.localizedDescription)")
+            return
+        }
+        guard let value = characteristic.value else {
+            print("No value found for characteristic: \(characteristic)")
+            return
+        }
+        if characteristic.uuid == voltageCharacteristicUUID {
+            if let data = characteristic.value {
+                let coverStatus = Int(data[0])
+                print("Status: \(coverStatus)")
+                DispatchQueue.main.async {
+                    self.Cover_Status = coverStatus
+                }
+            }
         }
     }
 }
@@ -173,22 +193,4 @@ extension BluetoothManager: CBPeripheralDelegate {
             }
         }
     }
-
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard error == nil else {
-            print("Error updating characteristic value: \(error!.localizedDescription)")
-            return
-        }
-        guard let value = characteristic.value else {
-            print("No value found for characteristic: \(characteristic)")
-            return
-        }
-        if characteristic.uuid == voltageCharacteristicUUID {
-            let voltage = Double (value.first ?? 0) as Double
-            print("Voltage: \(voltage) V")
-            self.voltage = voltage/100
-
-        }
-    }
-
-    }
+}

@@ -1,15 +1,3 @@
-//
-//  Bluetooth.swift
-//  Halo App
-//
-//  Created by Team 23 Halo on 2/14/23.
-//
-//
-
-
-
-
-
 import CoreBluetooth
 import UIKit
 import Combine
@@ -21,7 +9,10 @@ class BluetoothManager: NSObject, ObservableObject {
     internal var selectedPeripheral: CBPeripheral?
     private var cancellables: Set<AnyCancellable> = []
     @Published var isConnected = false
-    @Published var Cover_Status: Int = 1
+    @Published var voltage: Double = 0
+    @Published var accel: Double = 0
+    @Published var oldvoltage: Double = 0
+    @Published var voltageInt: Double = 0
     
     private let voltageServiceUUID = CBUUID(string: "75340d9a-b70d-11ed-afa1-0242ac120002")
     private let voltageCharacteristicUUID = CBUUID(string: "84244464-b70d-11ed-afa1-0242ac120002")
@@ -60,7 +51,7 @@ class BluetoothManager: NSObject, ObservableObject {
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard error == nil else {
-        print("Error updating characteristic value: \(error!.localizedDescription)")
+            print("Error updating characteristic value: \(error!.localizedDescription)")
             return
         }
         guard let value = characteristic.value else {
@@ -68,13 +59,26 @@ class BluetoothManager: NSObject, ObservableObject {
             return
         }
         if characteristic.uuid == voltageCharacteristicUUID {
-            if let data = characteristic.value {
-                let coverStatus = Int(data[0])
-                print("Status: \(coverStatus)")
-                DispatchQueue.main.async {
-                    self.Cover_Status = coverStatus
-                }
+            self.oldvoltage=voltageInt
+            let voltageString = String(data: value, encoding: .utf8) ?? ""
+            let components = voltageString.split(separator: ",")
+            if let voltageValue = Double(components.first ?? "") {
+                self.voltageInt = Double(voltageValue)
+                self.voltage = voltageInt
+                //print("Voltage: \(self.voltage)")
             }
+            if let accelValue = Double(components.last ?? "") {
+                self.accel = accelValue
+                print("Accel: \(self.accel)")
+            }
+        }
+    }
+    
+    func updateVoltageAndAccel(_ voltage: Double, _ accel: Double) -> Bool {
+        if self.accel > 0.9 && self.accel < 1.1 && abs(voltage - oldvoltage) > 4 {
+            return false
+        } else {
+            return true
         }
     }
 }

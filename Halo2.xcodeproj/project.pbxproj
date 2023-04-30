@@ -10,6 +10,7 @@
 		65416ADA29D6121C0028AFA4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65416AD929D6121C0028AFA4 /* UserNotifications.framework */; };
 		65416ADC29D6169D0028AFA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65416ADB29D6169D0028AFA4 /* AppDelegate.swift */; };
 		65416AE029D62A7B0028AFA4 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65416ADF29D62A7B0028AFA4 /* InfoView.swift */; };
+		65416AE629DF45A90028AFA4 /* halovid.mov in Resources */ = {isa = PBXBuildFile; fileRef = 65416AE529DF45A90028AFA4 /* halovid.mov */; };
 		65723EFF29A7F8120031BCB9 /* Halo2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65723EFE29A7F8120031BCB9 /* Halo2App.swift */; };
 		65723F0129A7F8120031BCB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65723F0029A7F8120031BCB9 /* ContentView.swift */; };
 		65723F0329A7F8130031BCB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65723F0229A7F8130031BCB9 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		65416AD929D6121C0028AFA4 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		65416ADB29D6169D0028AFA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65416ADF29D62A7B0028AFA4 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		65416AE529DF45A90028AFA4 /* halovid.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = halovid.mov; path = ../../../../Downloads/halovid.mov; sourceTree = "<group>"; };
 		65723EFB29A7F8120031BCB9 /* Halo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Halo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65723EFE29A7F8120031BCB9 /* Halo2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Halo2App.swift; sourceTree = "<group>"; };
 		65723F0029A7F8120031BCB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				65723F0029A7F8120031BCB9 /* ContentView.swift */,
 				65723F2829A7F85E0031BCB9 /* Bluetooth.swift */,
 				65416ADB29D6169D0028AFA4 /* AppDelegate.swift */,
+				65416AE529DF45A90028AFA4 /* halovid.mov */,
 				65723F0229A7F8130031BCB9 /* Assets.xcassets */,
 				65723F0429A7F8130031BCB9 /* Preview Content */,
 			);
@@ -262,6 +265,7 @@
 			files = (
 				65723F0629A7F8130031BCB9 /* Preview Assets.xcassets in Resources */,
 				65723F2C29A7FBDF0031BCB9 /* IMG_1765.PNG in Resources */,
+				65416AE629DF45A90028AFA4 /* halovid.mov in Resources */,
 				65723F0329A7F8130031BCB9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

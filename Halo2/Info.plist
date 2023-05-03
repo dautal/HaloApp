@@ -3,10 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIconFiles</key>
-	<array>
-		<string>IMG_1765.PNG</string>
-	</array>
-	<key>CFBundleIdentifier</key>
-	<string></string>
+	<array/>
 </dict>
 </plist>

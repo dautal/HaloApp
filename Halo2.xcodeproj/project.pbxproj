@@ -19,7 +19,6 @@
 		65723F1A29A7F8130031BCB9 /* Halo2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65723F1929A7F8130031BCB9 /* Halo2UITests.swift */; };
 		65723F1C29A7F8130031BCB9 /* Halo2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65723F1B29A7F8130031BCB9 /* Halo2UITestsLaunchTests.swift */; };
 		65723F2929A7F85E0031BCB9 /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65723F2829A7F85E0031BCB9 /* Bluetooth.swift */; };
-		65723F2C29A7FBDF0031BCB9 /* IMG_1765.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 65723F2B29A7FBDF0031BCB9 /* IMG_1765.PNG */; };
 		65723F2E29A7FCF70031BCB9 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65723F2D29A7FCF70031BCB9 /* Home.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +44,7 @@
 		65416ADB29D6169D0028AFA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65416ADF29D62A7B0028AFA4 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		65416AE529DF45A90028AFA4 /* halovid.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = halovid.mov; path = ../../../../Downloads/halovid.mov; sourceTree = "<group>"; };
-		65723EFB29A7F8120031BCB9 /* Halo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Halo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65723EFB29A7F8120031BCB9 /* Halo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Halo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65723EFE29A7F8120031BCB9 /* Halo2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Halo2App.swift; sourceTree = "<group>"; };
 		65723F0029A7F8120031BCB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		65723F0229A7F8130031BCB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +56,6 @@
 		65723F1B29A7F8130031BCB9 /* Halo2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Halo2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		65723F2829A7F85E0031BCB9 /* Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
 		65723F2A29A7FA400031BCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		65723F2B29A7FBDF0031BCB9 /* IMG_1765.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_1765.PNG; sourceTree = SOURCE_ROOT; };
 		65723F2D29A7FCF70031BCB9 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,7 +107,7 @@
 		65723EFC29A7F8120031BCB9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				65723EFB29A7F8120031BCB9 /* Halo2.app */,
+				65723EFB29A7F8120031BCB9 /* Halo.app */,
 				65723F0B29A7F8130031BCB9 /* Halo2Tests.xctest */,
 				65723F1529A7F8130031BCB9 /* Halo2UITests.xctest */,
 			);
@@ -119,7 +117,6 @@
 		65723EFD29A7F8120031BCB9 /* Halo2 */ = {
 			isa = PBXGroup;
 			children = (
-				65723F2B29A7FBDF0031BCB9 /* IMG_1765.PNG */,
 				65723F2A29A7FA400031BCB9 /* Info.plist */,
 				65723F2D29A7FCF70031BCB9 /* Home.swift */,
 				65723EFE29A7F8120031BCB9 /* Halo2App.swift */,
@@ -176,7 +173,7 @@
 			);
 			name = Halo2;
 			productName = Halo2;
-			productReference = 65723EFB29A7F8120031BCB9 /* Halo2.app */;
+			productReference = 65723EFB29A7F8120031BCB9 /* Halo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		65723F0A29A7F8130031BCB9 /* Halo2Tests */ = {
@@ -264,7 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65723F0629A7F8130031BCB9 /* Preview Assets.xcassets in Resources */,
-				65723F2C29A7FBDF0031BCB9 /* IMG_1765.PNG in Resources */,
 				65416AE629DF45A90028AFA4 /* halovid.mov in Resources */,
 				65723F0329A7F8130031BCB9 /* Assets.xcassets in Resources */,
 			);
@@ -452,18 +448,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Halo2/Preview Content\"";
-				DEVELOPMENT_TEAM = TL34K4C22X;
+				DEVELOPMENT_TEAM = B2HQKZPPZB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Halo2/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Halo;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -471,7 +470,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Halo.Halo2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Halo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -483,18 +482,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Halo2/Preview Content\"";
-				DEVELOPMENT_TEAM = TL34K4C22X;
+				DEVELOPMENT_TEAM = B2HQKZPPZB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Halo2/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Halo;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -502,7 +504,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Halo.Halo2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Halo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -16,9 +16,9 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Image("IMG_1765")
+                Image("Logo")
                     .resizable()
-                    .frame(width: 150, height: 150)
+                    .frame(width: 240, height: 240)
                     .padding(.top, 150)
                 
                 Spacer()

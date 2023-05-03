@@ -13,6 +13,8 @@ class BluetoothManager: NSObject, ObservableObject {
     @Published var accel: Double = 0
     @Published var oldvoltage: Double = 0
     @Published var voltageInt: Double = 0
+    @Published var threshold: Double = 1.8
+    
     
     private let voltageServiceUUID = CBUUID(string: "75340d9a-b70d-11ed-afa1-0242ac120002")
     private let voltageCharacteristicUUID = CBUUID(string: "84244464-b70d-11ed-afa1-0242ac120002")
@@ -20,6 +22,11 @@ class BluetoothManager: NSObject, ObservableObject {
     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        threshold = UserDefaults.standard.double(forKey: "threshold")
+    }
+    
+    func saveThresholdToUserDefaults() {
+        UserDefaults.standard.setValue(threshold, forKey: "threshold")
     }
 
     func startScanning() {
@@ -50,6 +57,7 @@ class BluetoothManager: NSObject, ObservableObject {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        //print("Thres: \(self.threshold)")
         guard error == nil else {
             print("Error updating characteristic value: \(error!.localizedDescription)")
             return
@@ -69,13 +77,13 @@ class BluetoothManager: NSObject, ObservableObject {
             }
             if let accelValue = Double(components.last ?? "") {
                 self.accel = accelValue
-                print("Accel: \(self.accel)")
+                //print("Accel: \(self.accel)")
             }
         }
     }
     
     func updateVoltageAndAccel(_ voltage: Double, _ accel: Double) -> Bool {
-        if self.accel > 0.9 && self.accel < 1.1 && abs(voltage - oldvoltage) > 4 {
+        if self.accel > 0.9 && self.accel < 1.1 && abs(voltage - oldvoltage) > threshold {
             return false
         } else {
             return true

@@ -73,7 +73,7 @@ class BluetoothManager: NSObject, ObservableObject {
             if let voltageValue = Double(components.first ?? "") {
                 self.voltageInt = Double(voltageValue)
                 self.voltage = voltageInt
-                //print("Voltage: \(self.voltage)")
+                print("Voltage: \(self.voltage)")
             }
             if let accelValue = Double(components.last ?? "") {
                 self.accel = accelValue
@@ -83,7 +83,8 @@ class BluetoothManager: NSObject, ObservableObject {
     }
     
     func updateVoltageAndAccel(_ voltage: Double, _ accel: Double) -> Bool {
-        if self.accel > 0.9 && self.accel < 1.1 && abs(voltage - oldvoltage) > threshold {
+        //if self.accel > 0.9 && self.accel < 1.1 && abs(voltage - oldvoltage) > threshold {
+        if abs(voltage - oldvoltage) > threshold {
             return false
         } else {
             return true

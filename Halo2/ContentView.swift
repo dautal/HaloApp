@@ -212,7 +212,7 @@ struct DeviceInfoView: View {
                         isRed = true
                     sendNotification()
                     }
-            print("red: \(isRed)")
+            //print("red: \(isRed)")
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
